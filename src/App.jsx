@@ -6,7 +6,13 @@ function App() {
   const [todoList, setTodoList] = useState([]);
 
   function addTodo(content) {
-    const todo = { id: crypto.randomUUID(), done: false, edit: false, content };
+    const todo = {
+      id: crypto.randomUUID(),
+      done: false,
+      edit: false,
+      selected: false,
+      content,
+    };
     setTodoList([...todoList, todo]);
   }
 
@@ -33,7 +39,17 @@ function App() {
   function editTodo(id, content) {
     setTodoList(
       todoList.map((todo) =>
-        todo.id === id ? { ...todo, content, edit: false } : todo
+        todo.id === id ? { ...todo, edit: false, content } : todo
+      )
+    );
+  }
+
+  function selectTodo(id) {
+    setTodoList(
+      todoList.map((todo) =>
+        todo.id === id
+          ? { ...todo, selected: !todo.selected }
+          : { ...todo, selected: false }
       )
     );
   }
@@ -49,6 +65,7 @@ function App() {
           toggleTodo={toggleTodo}
           toggleTodoEdit={toggleTodoEdit}
           editTodo={editTodo}
+          selectTodo={selectTodo}
         />
       </div>
     </div>

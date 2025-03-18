@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-// eslint-disable-next-line react/prop-types
-function EditTodo({ todo, editTodo, cancelTodo }) {
+export default function EditTodo({ todo, editTodo, cancelEditTodo }) {
   const [value, setValue] = useState(todo.content);
 
   function handleChange(e) {
@@ -33,13 +32,12 @@ function EditTodo({ todo, editTodo, cancelTodo }) {
         className="mr-15 flex-fill"
         placeholder="Ajouter une tâche"
       />
-      <button onClick={cancelTodo} className="btn btn-reverse-primary mr-15">
-        Annuler
-      </button>
-      <button onClick={handleClick} className="btn btn-primary">
+      <button onClick={handleClick} className="btn btn-primary mr-15">
         Sauvegarder
+      </button>
+      <button onClick={cancelEditTodo} className="btn btn-reverse-primary">
+        Annuler
       </button>
     </div>
   );
 }
-export default EditTodo;
